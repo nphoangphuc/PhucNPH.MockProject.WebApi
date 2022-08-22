@@ -25,7 +25,10 @@ namespace PhucNPH.MockProject.Domain.Validation
 
             RuleFor(request => request.DOB)
                .NotEmpty()
-               .WithMessage(ValidationConstants.Messages.FieldIsRequried(nameof(EmployeeCreateModel.DOB)));
+               .WithMessage(ValidationConstants.Messages.FieldIsRequried(nameof(EmployeeCreateModel.DOB)))
+               .Must(DOB => ValidationConstants.ValidateValidDateTime(DOB))
+               .WithMessage(ValidationConstants.Messages.InvalidDate(nameof(EmployeeCreateModel.DOB)));
         }
+
     }
 }

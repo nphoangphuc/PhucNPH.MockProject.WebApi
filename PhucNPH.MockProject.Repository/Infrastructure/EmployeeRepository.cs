@@ -15,6 +15,8 @@ namespace PhucNPH.MockProject.Repository.Infrastructure
         Task<Employee> GetByEmployeeId(Guid emoloyeeId);
         Task<Employee> GetByEmployeeUsername(string Username);
         Task<Employee> LoginAsync(LoginModel loginModel);
+        Task SoftDelete(Employee employee);
+        Task<List<Employee>> GetMultipleEmployees();
     }
 
     public class EmployeeRepository : Repository<AppDbContext, Employee>, IEmployeeRepository
@@ -44,12 +46,32 @@ namespace PhucNPH.MockProject.Repository.Infrastructure
 
             var employee = await base.SearchForSingleItemAsync(emp => emp.Username == loginModel.Username && emp.Deleted == false);
 
-            if (employee != null && hasher.VerifyHashedPassword(employee.Password, loginModel.Password) == PasswordVerificationResult.Success)
+            try
             {
-                return employee;
+                if (employee != null 
+                    && hasher.VerifyHashedPassword(employee.Password, loginModel.Password) == PasswordVerificationResult.Success)
+                {
+                    return employee;
+                }
+            }
+            catch (Exception)
+            {
+                return null;
             }
 
             return null;
+        }
+
+        public async Task SoftDelete(Employee employee)
+        {
+           employee.Deleted = true;
+           await base.UpdateAsync(employee);
+        }
+
+        public async Task<List<Employee>> GetMultipleEmployees()
+        {
+            var employees = await base.SearchForMultipleItemAsync(emp => emp.Deleted == false);
+            return employees;
         }
     }
 }

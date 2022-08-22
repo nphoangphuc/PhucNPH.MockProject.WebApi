@@ -16,7 +16,8 @@ namespace PhucNPH.MockProject.Domain.Filters
     {
         public override void OnException(ExceptionContext context)
         {
-            if (context.Exception.InnerException.Message.Contains(ValidationConstants.ExceptionType.DuplicatedUsername))
+            if (context.Exception.InnerException != null && 
+                context.Exception.InnerException.Message.Contains(ValidationConstants.ExceptionType.DuplicatedUsername))
             {
                 context.HttpContext.Response.StatusCode = (int)HttpStatusCode.UnprocessableEntity;
 

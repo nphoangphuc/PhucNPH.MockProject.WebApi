@@ -20,7 +20,8 @@ namespace PhucNPH.MockProject.Presentation.Startup
                 .AddFluentValidation(options =>
                 {
                     options.RegisterValidatorsFromAssemblyContaining<LoginModelValidation>();
-                });
+                })
+                .AddNewtonsoftJson();
         }
     }
 }

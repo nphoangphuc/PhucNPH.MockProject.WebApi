@@ -32,21 +32,6 @@ namespace PhucNPH.MockProject.Presentation.Controllers
             _configuration = configuration;
         }
 
-        [HttpGet]
-        [Route("id/{employeeId}")]
-        public async Task<ActionResult<EmployeeModel>> GetEmployee(Guid employeeId)
-        {
-            var employee = await _unitOfWork.EmployeeRepository.GetByEmployeeId(employeeId);
-
-            var employeeModel = _employeeMapper.MapEmployeeToEmployeeModel(employee);
-            if (employeeModel == null)
-            {
-                return NotFound(new ResponseResult(404, "This employee is not existed"));
-            }
-
-            return employeeModel;
-        }
-
         [HttpPost]
         [AllowAnonymous]
         public async Task<IActionResult> CreateEmployee(EmployeeCreateModel employeeCreateModel)
@@ -60,34 +45,6 @@ namespace PhucNPH.MockProject.Presentation.Controllers
                 new { employeeId = employee.Id },
                 _employeeMapper.MapEmployeeToEmployeeModel(employee));
 
-        }
-
-        [HttpGet]
-        public async Task<ActionResult<List<EmployeeModel>>> GetEmployees()
-        {
-            var employees = await _unitOfWork.EmployeeRepository.SearchForMultipleItemAsync();
-
-            var employeeModels = employees.Select(employee => _employeeMapper.MapEmployeeToEmployeeModel(employee)).ToList();
-
-            return employeeModels;
-        }
-
-        [HttpPut]
-        [Route("id/{employeeId}")]
-        public async Task<IActionResult> UpdateEmployee(Guid employeeId, EmployeeUpdateModel employeeUpdateModel)
-        {
-            var currentEmployee = await _unitOfWork.EmployeeRepository.GetByEmployeeId(employeeId);
-
-            if (currentEmployee == null)
-            {
-                return NotFound(new ResponseResult(404, "This employee is not existed"));
-            }
-            currentEmployee = _employeeMapper.MapEmployeeUpdateModelToEmployee(employeeUpdateModel, currentEmployee);
-
-            await _unitOfWork.EmployeeRepository.UpdateAsync(currentEmployee);
-            await _unitOfWork.SaveChangesAsync();
-
-            return NoContent();
         }
 
         [HttpPost("login")]
@@ -133,6 +90,76 @@ namespace PhucNPH.MockProject.Presentation.Controllers
 
                 return Ok(new ResponseResult(200, strToken));
             }
+        }
+
+        [HttpGet]
+        [Route("id/{employeeId}")]
+        public async Task<ActionResult<EmployeeModel>> GetEmployee(Guid employeeId)
+        {
+            var employee = await _unitOfWork.EmployeeRepository.GetByEmployeeId(employeeId);
+
+            var employeeModel = _employeeMapper.MapEmployeeToEmployeeModel(employee);
+            if (employeeModel == null)
+            {
+                return NotFound(new ResponseResult(404, "This employee is not existed"));
+            }
+
+            return employeeModel;
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<List<EmployeeModel>>> GetEmployees()
+        {
+            var employees = await _unitOfWork.EmployeeRepository.GetMultipleEmployees();
+
+            var employeeModels = employees.Select(employee => _employeeMapper.MapEmployeeToEmployeeModel(employee)).ToList();
+
+            return employeeModels;
+        }
+
+        [HttpPut]
+        [Route("id/{employeeId}")]
+        public async Task<IActionResult> UpdateEmployee(Guid employeeId, EmployeeUpdateModel employeeUpdateModel)
+        {
+            var currentEmployee = await _unitOfWork.EmployeeRepository.GetByEmployeeId(employeeId);
+
+            if (currentEmployee == null)
+            {
+                return NotFound(new ResponseResult(404, "This employee is not existed"));
+            }
+            currentEmployee = _employeeMapper.MapEmployeeUpdateModelToEmployee(employeeUpdateModel, currentEmployee);
+
+            await _unitOfWork.EmployeeRepository.UpdateAsync(currentEmployee);
+            await _unitOfWork.SaveChangesAsync();
+
+            return NoContent();
+        }
+
+
+        [HttpDelete]
+        [Route("id/{employeeId}")]
+        public async Task<IActionResult> DeleteEmployee(Guid employeeId)
+        {
+            var currentEmployee = await _unitOfWork.EmployeeRepository.GetByEmployeeId(employeeId);
+
+            if (currentEmployee == null)
+            {
+                return NotFound(new ResponseResult(404, "This employee is not existed"));
+            }
+            try
+            {
+                await _unitOfWork.EmployeeRepository.SoftDelete(currentEmployee);
+                await _unitOfWork.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+
+
+
+            return NoContent();
         }
     }
 }
