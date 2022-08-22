@@ -135,7 +135,6 @@ namespace PhucNPH.MockProject.Presentation.Controllers
             return NoContent();
         }
 
-
         [HttpDelete]
         [Route("id/{employeeId}")]
         public async Task<IActionResult> DeleteEmployee(Guid employeeId)
@@ -153,11 +152,8 @@ namespace PhucNPH.MockProject.Presentation.Controllers
             }
             catch (Exception ex)
             {
-
                 throw;
             }
-
-
 
             return NoContent();
         }
