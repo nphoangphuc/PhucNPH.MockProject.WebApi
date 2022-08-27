@@ -63,44 +63,6 @@ namespace PhucNPH.MockProject.Repository.Migrations
 
                     b.ToTable("Employees", (string)null);
                 });
-
-            modelBuilder.Entity("PhucNPH.MockProject.Domain.Entities.JobDetail", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("JobDescription")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("JobLevel")
-                        .HasColumnType("int");
-
-                    b.Property<string>("JobTitle")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("JobDetail", (string)null);
-                });
-
-            modelBuilder.Entity("PhucNPH.MockProject.Domain.Entities.JobDetail", b =>
-                {
-                    b.HasOne("PhucNPH.MockProject.Domain.Entities.Employee", "Employee")
-                        .WithOne("JobDetail")
-                        .HasForeignKey("PhucNPH.MockProject.Domain.Entities.JobDetail", "Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Employee");
-                });
-
-            modelBuilder.Entity("PhucNPH.MockProject.Domain.Entities.Employee", b =>
-                {
-                    b.Navigation("JobDetail")
-                        .IsRequired();
-                });
 #pragma warning restore 612, 618
         }
     }
