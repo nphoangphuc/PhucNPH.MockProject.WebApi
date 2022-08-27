@@ -12,6 +12,10 @@ namespace PhucNPH.MockProject.Repository.Infrastructure.Configuration
 
             builder.HasKey(x => x.Id);
             builder.HasIndex(x => new { x.Username }).IsUnique();
+
+            builder.HasOne<JobDetail>(e => e.JobDetail)
+                .WithOne(jd => jd.Employee)
+                .HasForeignKey<JobDetail>(jd => jd.Id);
         }
     }
 }
