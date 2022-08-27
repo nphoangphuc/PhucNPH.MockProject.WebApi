@@ -44,3 +44,58 @@ GO
 COMMIT;
 GO
 
+BEGIN TRANSACTION;
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20220827142932_add_jobtitle_department_entity')
+BEGIN
+    ALTER TABLE [Employees] DROP CONSTRAINT [PK_Employees];
+END;
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20220827142932_add_jobtitle_department_entity')
+BEGIN
+    ALTER TABLE [Employees] ADD CONSTRAINT [EmployeeId] PRIMARY KEY ([Id]);
+END;
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20220827142932_add_jobtitle_department_entity')
+BEGIN
+    CREATE TABLE [Departments] (
+        [Id] uniqueidentifier NOT NULL,
+        [DepartmentName] nvarchar(max) NOT NULL,
+        [DepartmentLocation] nvarchar(max) NOT NULL,
+        CONSTRAINT [PK_Departments] PRIMARY KEY ([Id])
+    );
+END;
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20220827142932_add_jobtitle_department_entity')
+BEGIN
+    CREATE TABLE [JobDetail] (
+        [Id] uniqueidentifier NOT NULL,
+        [JobTitle] nvarchar(max) NOT NULL,
+        [JobDescription] nvarchar(max) NOT NULL,
+        [JobLevel] int NOT NULL,
+        CONSTRAINT [PK_JobDetail] PRIMARY KEY ([Id]),
+        CONSTRAINT [FK_JobDetail_Employees_Id] FOREIGN KEY ([Id]) REFERENCES [Employees] ([Id]) ON DELETE CASCADE
+    );
+END;
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20220827142932_add_jobtitle_department_entity')
+BEGIN
+    ALTER TABLE [Employees] ADD CONSTRAINT [FK_Employees_Departments_Id] FOREIGN KEY ([Id]) REFERENCES [Departments] ([Id]) ON DELETE CASCADE;
+END;
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20220827142932_add_jobtitle_department_entity')
+BEGIN
+    INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+    VALUES (N'20220827142932_add_jobtitle_department_entity', N'6.0.8');
+END;
+GO
+
+COMMIT;
+GO
+
