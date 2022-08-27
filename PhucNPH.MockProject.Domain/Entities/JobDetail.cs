@@ -9,6 +9,6 @@ namespace PhucNPH.MockProject.Domain.Entities
 		public int JobLevel { get; set; }
 
 		// 1-to-1 relationship
-		public virtual Employee Employee { get; set; }
+		public Employee Employee { get; set; }
 	}
 }

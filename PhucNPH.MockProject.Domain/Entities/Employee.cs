@@ -12,6 +12,10 @@
         public uint RecordVersion { get; set; }
 
         // 1-to-1 relationship
-        public virtual JobDetail JobDetail { get; set; }
-    }
+        public JobDetail JobDetail { get; set; }
+
+        // 1-to-many relationship
+		public Department Department { get; set; }
+
+	}
 }

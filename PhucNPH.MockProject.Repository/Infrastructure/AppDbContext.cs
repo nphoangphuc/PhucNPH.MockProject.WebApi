@@ -8,6 +8,7 @@ namespace PhucNPH.MockProject.Repository.Infrastructure
     {
         public DbSet<Employee> Employees { get; set; }
         public DbSet<JobDetail> JobDetails { get; set; }
+        public DbSet<Department> Departments { get; set; }
 
         public AppDbContext(DbContextOptions<AppDbContext> options)
             : base(options)
@@ -18,6 +19,7 @@ namespace PhucNPH.MockProject.Repository.Infrastructure
         {
             modelBuilder.ApplyConfiguration(new EmployeeConfiguration());   
             modelBuilder.ApplyConfiguration(new JobDetailConfiguration());   
+            modelBuilder.ApplyConfiguration(new DepartmentConfiguration());   
         }
     }
 }
