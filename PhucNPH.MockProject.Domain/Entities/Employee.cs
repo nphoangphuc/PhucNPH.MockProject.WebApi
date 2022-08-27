@@ -10,5 +10,8 @@
         public int YearExperience { get; set; }
         public bool Deleted { get; set; }
         public uint RecordVersion { get; set; }
+
+        // 1-to-1 relationship
+        public virtual JobDetail JobDetail { get; set; }
     }
 }
