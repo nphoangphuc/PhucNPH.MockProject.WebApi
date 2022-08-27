@@ -10,7 +10,7 @@ namespace PhucNPH.MockProject.Repository.Infrastructure.Configuration
 		{
 			builder.ToTable("Employees");
 
-			builder.HasKey(x => x.Id);
+			builder.HasKey(x => x.Id).HasName("EmployeeId");
 			builder.HasIndex(x => new { x.Username }).IsUnique();
 
 			builder.HasOne<JobDetail>(e => e.JobDetail)

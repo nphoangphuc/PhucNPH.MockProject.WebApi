@@ -44,29 +44,3 @@ GO
 COMMIT;
 GO
 
-BEGIN TRANSACTION;
-GO
-
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20220827131231_Add_JobTitle_entity')
-BEGIN
-    CREATE TABLE [JobDetail] (
-        [Id] uniqueidentifier NOT NULL,
-        [JobTitle] nvarchar(max) NOT NULL,
-        [JobDescription] nvarchar(max) NOT NULL,
-        [JobLevel] int NOT NULL,
-        CONSTRAINT [PK_JobDetail] PRIMARY KEY ([Id]),
-        CONSTRAINT [FK_JobDetail_Employees_Id] FOREIGN KEY ([Id]) REFERENCES [Employees] ([Id]) ON DELETE CASCADE
-    );
-END;
-GO
-
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20220827131231_Add_JobTitle_entity')
-BEGIN
-    INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
-    VALUES (N'20220827131231_Add_JobTitle_entity', N'6.0.8');
-END;
-GO
-
-COMMIT;
-GO
-
