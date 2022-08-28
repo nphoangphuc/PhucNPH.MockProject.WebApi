@@ -11,10 +11,12 @@
         public bool Deleted { get; set; }
         public uint RecordVersion { get; set; }
 
-        // 1-to-1 relationship
-        public JobDetail JobDetail { get; set; }
+		// 1-to-1 relationship
+		public Guid JobDetailId { get; set; }
+		public JobDetail JobDetail { get; set; }
 
-        // 1-to-many relationship
+		// 1-to-many relationship
+		public Guid DepartmentId { get; set; }
 		public Department Department { get; set; }
 
 	}

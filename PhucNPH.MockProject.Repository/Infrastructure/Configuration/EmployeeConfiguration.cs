@@ -15,7 +15,7 @@ namespace PhucNPH.MockProject.Repository.Infrastructure.Configuration
 
 			builder.HasOne<JobDetail>(e => e.JobDetail)
 				.WithOne(jd => jd.Employee)
-				.HasForeignKey<JobDetail>(jd => jd.Id);
+				.HasForeignKey<Employee>(e => e.JobDetailId);
 		}
 	}
 }

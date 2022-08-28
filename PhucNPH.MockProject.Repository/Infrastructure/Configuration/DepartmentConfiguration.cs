@@ -14,7 +14,7 @@ namespace PhucNPH.MockProject.Repository.Infrastructure.Configuration
 
 			builder.HasMany<Employee>(d => d.Employees)
 				.WithOne(e => e.Department)
-				.HasForeignKey(e => e.Id);
+				.HasForeignKey(e => e.DepartmentId);
 		}
 	}
 }
