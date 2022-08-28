@@ -42,7 +42,7 @@ namespace PhucNPH.MockProject.Service.Mapper
 				DepartmentName = department.DepartmentName,
 				DepartmentLocation = department.DepartmentLocation,
 				NumberOfEmployees =	 department.Employees.Count,
-				EmployeeModels = department.Employees.Select(emp => new EmployeeModel
+				Employees = department.Employees?.Select(emp => new EmployeeModel
 				{
 					Id=emp.Id,
 					Username = emp.Username,

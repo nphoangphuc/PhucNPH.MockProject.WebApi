@@ -12,6 +12,6 @@ namespace PhucNPH.MockProject.Domain.Models
 		public string DepartmentName { get; set; }
 		public string DepartmentLocation { get; set; }
 		public int NumberOfEmployees { get; set; }
-		public List<EmployeeModel> EmployeeModels { get; set; }
+		public List<EmployeeModel> Employees { get; set; }
 	}
 }
