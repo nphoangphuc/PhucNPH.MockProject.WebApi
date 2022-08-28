@@ -72,6 +72,13 @@ namespace PhucNPH.MockProject.Service.Mapper
             currentEmployee.Phone = employee.Phone;
             currentEmployee.YearExperience = employee.YearExperience;
 
+            if(employee.JobDetailUpdateModel != null)
+            {
+                currentEmployee.JobDetail.JobTitle = Enum.Parse<JobTitle>(employee.JobDetailUpdateModel.JobTitle);
+                currentEmployee.JobDetail.JobDescription = employee.JobDetailUpdateModel.JobDescription;
+                currentEmployee.JobDetail.JobLevel = employee.JobDetailUpdateModel.JobLevel;
+			}
+
             return currentEmployee;
         }
     }

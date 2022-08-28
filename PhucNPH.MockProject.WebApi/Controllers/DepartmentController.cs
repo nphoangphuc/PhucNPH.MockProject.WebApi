@@ -62,7 +62,6 @@ namespace PhucNPH.MockProject.Presentation.Controllers
 		}
 
 		[HttpGet]
-		[Route("employees")]
 		public async Task<ActionResult<List<DepartmentModel>>> GetEmployeesInDepartments()
 		{
 			var departments = await _unitOfWork.DepartmentRepository.GetMultipleDepartmentEmployees();

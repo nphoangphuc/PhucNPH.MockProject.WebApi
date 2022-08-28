@@ -142,6 +142,7 @@ namespace PhucNPH.MockProject.Presentation.Controllers
             {
                 return NotFound(new ResponseResult(404, "This employee is not existed"));
             }
+
             currentEmployee = _employeeMapper.MapEmployeeUpdateModelToEmployee(employeeUpdateModel, currentEmployee);
 
             await _unitOfWork.EmployeeRepository.UpdateAsync(currentEmployee);
