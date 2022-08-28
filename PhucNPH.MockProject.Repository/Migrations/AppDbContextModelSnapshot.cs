@@ -22,28 +22,10 @@ namespace PhucNPH.MockProject.Repository.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("PhucNPH.MockProject.Domain.Entities.Department", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("DepartmentLocation")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("DepartmentName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Departments", (string)null);
-                });
-
             modelBuilder.Entity("PhucNPH.MockProject.Domain.Entities.Employee", b =>
                 {
                     b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Address")
@@ -74,67 +56,12 @@ namespace PhucNPH.MockProject.Repository.Migrations
                     b.Property<int>("YearExperience")
                         .HasColumnType("int");
 
-                    b.HasKey("Id")
-                        .HasName("EmployeeId");
+                    b.HasKey("Id");
 
                     b.HasIndex("Username")
                         .IsUnique();
 
                     b.ToTable("Employees", (string)null);
-                });
-
-            modelBuilder.Entity("PhucNPH.MockProject.Domain.Entities.JobDetail", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("JobDescription")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("JobLevel")
-                        .HasColumnType("int");
-
-                    b.Property<string>("JobTitle")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("JobDetail", (string)null);
-                });
-
-            modelBuilder.Entity("PhucNPH.MockProject.Domain.Entities.Employee", b =>
-                {
-                    b.HasOne("PhucNPH.MockProject.Domain.Entities.Department", "Department")
-                        .WithMany("Employees")
-                        .HasForeignKey("Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Department");
-                });
-
-            modelBuilder.Entity("PhucNPH.MockProject.Domain.Entities.JobDetail", b =>
-                {
-                    b.HasOne("PhucNPH.MockProject.Domain.Entities.Employee", "Employee")
-                        .WithOne("JobDetail")
-                        .HasForeignKey("PhucNPH.MockProject.Domain.Entities.JobDetail", "Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Employee");
-                });
-
-            modelBuilder.Entity("PhucNPH.MockProject.Domain.Entities.Department", b =>
-                {
-                    b.Navigation("Employees");
-                });
-
-            modelBuilder.Entity("PhucNPH.MockProject.Domain.Entities.Employee", b =>
-                {
-                    b.Navigation("JobDetail")
-                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }
