@@ -22,21 +22,36 @@ namespace PhucNPH.MockProject.Presentation.Controllers
         private readonly IUnitOfWork _unitOfWork;
         private readonly IEmployeeMapper _employeeMapper;
         private readonly IConfiguration _configuration;
+        private readonly IJobDetailMapper _jobDetailMapper;
 
         public EmployeeController(IUnitOfWork unitOfWork,
             IEmployeeMapper employeeMapper,
-            IConfiguration configuration)
+            IConfiguration configuration,
+			IJobDetailMapper jobDetailMapper)
         {
             _unitOfWork = unitOfWork;
             _employeeMapper = employeeMapper;
             _configuration = configuration;
+            _jobDetailMapper = jobDetailMapper;
         }
 
         [HttpPost]
         [AllowAnonymous]
         public async Task<IActionResult> CreateEmployee(EmployeeCreateModel employeeCreateModel)
         {
+            var department = await _unitOfWork.DepartmentRepository.GetByDepartmentId(employeeCreateModel.DepartmentId);
+
+            if (department == null)
+            {
+                return BadRequest(new ResponseResult(400, "The department is not existed"));
+            }
+
+            var jobDetail = _jobDetailMapper.MapJobDetailCreateModelToJobDetail(employeeCreateModel.JobDetailCreateModel);
+			jobDetail = await _unitOfWork.JobDetailRepository.CreateAsync(jobDetail);
+
             var employee = _employeeMapper.MapEmployeeCreateModelToEmployee(employeeCreateModel);
+            employee.JobDetailId = jobDetail.Id;
+
             employee = await _unitOfWork.EmployeeRepository.CreateAsync(employee);
             await _unitOfWork.SaveChangesAsync();
 

@@ -7,7 +7,7 @@ namespace PhucNPH.MockProject.Repository.Infrastructure.Repository
 	{
 		Task<Department> GetByDepartmentId(Guid departmentId);
 		Task SoftDelete(Department department);
-		Task<List<Department>> GetMultipleDepartment();
+		Task<List<Department>> GetMultipleDepartments();
 	}
 
 	public class DepartmentRepository : Repository<AppDbContext, Department>, IDepartmentRepository
@@ -23,7 +23,7 @@ namespace PhucNPH.MockProject.Repository.Infrastructure.Repository
 			return department;
 		}
 
-		public async Task<List<Department>> GetMultipleDepartment()
+		public async Task<List<Department>> GetMultipleDepartments()
 		{
 			var employees = await base.SearchForMultipleItemAsync(d => d.Deleted == false);
 			return employees;

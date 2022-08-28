@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace PhucNPH.MockProject.Domain.Models
 {
-	public enum JobTitle
+	public class DepartmentModel
 	{
-		DEVELOPER = 1,
-		QUALITY_CONTROL,
-		BUSINESS_ANALYST
+		public Guid Id { get; set; }
+		public string DepartmentName { get; set; }
+		public string DepartmentLocation { get; set; }
 	}
 }

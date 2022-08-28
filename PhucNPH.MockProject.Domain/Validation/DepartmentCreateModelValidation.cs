@@ -12,13 +12,13 @@ namespace PhucNPH.MockProject.Domain.Validation
                 .NotEmpty()
                 .WithMessage(ValidationConstants.Messages.FieldIsRequried(nameof(DepartmentCreateModel.DepartmentName)))
                 .MinimumLength(6)
-                .WithMessage(ValidationConstants.Messages.MinLengthRequired(nameof(DepartmentCreateModel.DepartmentName), ValidationConstants.Constants.DepartmentMinLength));
+                .WithMessage(ValidationConstants.Messages.MinLengthRequired(nameof(DepartmentCreateModel.DepartmentName), ValidationConstants.Constants.StringMinLength));
 
 			RuleFor(request => request.DepartmentLocation)
 				 .NotEmpty()
 				 .WithMessage(ValidationConstants.Messages.FieldIsRequried(nameof(DepartmentCreateModel.DepartmentLocation)))
                  .MinimumLength(6)
-                 .WithMessage(ValidationConstants.Messages.MinLengthRequired(nameof(DepartmentCreateModel.DepartmentLocation), ValidationConstants.Constants.DepartmentMinLength));
+                 .WithMessage(ValidationConstants.Messages.MinLengthRequired(nameof(DepartmentCreateModel.DepartmentLocation), ValidationConstants.Constants.StringMinLength));
 		}
 
     }

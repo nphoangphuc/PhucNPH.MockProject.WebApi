@@ -31,6 +31,7 @@ namespace PhucNPH.MockProject.Service.Mapper
                 Phone = employee.Phone,
                 Username = employee.Username,
                 YearExperience = employee.YearExperience,
+                DepartmentId = employee.DepartmentId,
             };
         }
 

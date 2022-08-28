@@ -47,6 +47,8 @@ builder.Services.AddSwaggerGen(c =>
 builder.Services.AddDbContextPool<AppDbContext>
     (options => options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddTransient<IEmployeeMapper, EmployeeMapper>();
+builder.Services.AddTransient<IJobDetailMapper, JobDetailMapper>();
+builder.Services.AddTransient<IDepartmentMapper, DepartmentMapper>();
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.SetupControllers();

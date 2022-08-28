@@ -28,7 +28,9 @@ namespace PhucNPH.MockProject.Domain.Validation
                .WithMessage(ValidationConstants.Messages.FieldIsRequried(nameof(EmployeeCreateModel.DOB)))
                .Must(DOB => ValidationConstants.ValidateValidDateTime(DOB))
                .WithMessage(ValidationConstants.Messages.InvalidDate(nameof(EmployeeCreateModel.DOB)));
-        }
 
-    }
+            RuleFor(request => request.JobDetailCreateModel).SetValidator(new JobDetailCreateModelValidation());
+		}
+
+	}
 }
