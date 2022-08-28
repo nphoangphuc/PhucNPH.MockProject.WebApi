@@ -3,7 +3,7 @@ using PhucNPH.MockProject.Domain.Entities;
 using PhucNPH.MockProject.Domain.Models;
 using PhucNPH.MockProject.Repository.Infrastructure.Repository;
 
-namespace PhucNPH.MockProject.Repository.Infrastructure
+namespace PhucNPH.MockProject.Repository.Infrastructure.Repository
 {
     public interface IEmployeeRepository : IRepository<Employee>
     {

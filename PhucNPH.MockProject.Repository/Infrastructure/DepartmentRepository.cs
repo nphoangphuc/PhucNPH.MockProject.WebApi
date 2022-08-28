@@ -1,7 +1,7 @@
 ﻿using PhucNPH.MockProject.Domain.Entities;
 using PhucNPH.MockProject.Repository.Infrastructure.Repository;
 
-namespace PhucNPH.MockProject.Repository.Infrastructure
+namespace PhucNPH.MockProject.Repository.Infrastructure.Repository
 {
 	public interface IDepartmentRepository : IRepository<Department>
 	{
