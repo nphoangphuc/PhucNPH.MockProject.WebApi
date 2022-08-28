@@ -141,3 +141,27 @@ GO
 COMMIT;
 GO
 
+BEGIN TRANSACTION;
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20220828090908_add_seed_data')
+BEGIN
+    IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Deleted', N'DepartmentLocation', N'DepartmentName') AND [object_id] = OBJECT_ID(N'[Departments]'))
+        SET IDENTITY_INSERT [Departments] ON;
+    EXEC(N'INSERT INTO [Departments] ([Id], [Deleted], [DepartmentLocation], [DepartmentName])
+    VALUES (''b1028c84-b929-46de-afc1-157af578ef05'', CAST(0 AS bit), N''HEAD_OFFICE'', N''ADMIN_GROUP'')');
+    IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Deleted', N'DepartmentLocation', N'DepartmentName') AND [object_id] = OBJECT_ID(N'[Departments]'))
+        SET IDENTITY_INSERT [Departments] OFF;
+END;
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20220828090908_add_seed_data')
+BEGIN
+    INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+    VALUES (N'20220828090908_add_seed_data', N'6.0.8');
+END;
+GO
+
+COMMIT;
+GO
+

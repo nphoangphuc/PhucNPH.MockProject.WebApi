@@ -10,5 +10,6 @@ namespace PhucNPH.MockProject.Domain.Models
         public string Phone { get; set; }
         public string Address { get; set; }
         public int YearExperience { get; set; }
+        public JobDetailModel JobDetail { get; set; }
     }
 }

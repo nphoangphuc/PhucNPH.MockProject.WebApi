@@ -50,6 +50,13 @@ namespace PhucNPH.MockProject.Service.Mapper
                 Phone = employee.Phone,
                 Username = employee.Username,
                 YearExperience = employee.YearExperience,
+                JobDetail = new JobDetailModel
+                {
+                    Id = employee.JobDetail.Id,
+                    JobDescription = employee.JobDetail.JobDescription,
+                    JobLevel = employee.JobDetail.JobLevel,
+                    JobTitle = employee.JobDetail.JobTitle.ToString()
+                }
             };
         }
 
@@ -62,7 +69,6 @@ namespace PhucNPH.MockProject.Service.Mapper
 
             currentEmployee.Address = employee.Address;
             currentEmployee.DOB = employee.DOB;
-            currentEmployee.Password = employee.Password;
             currentEmployee.Phone = employee.Phone;
             currentEmployee.YearExperience = employee.YearExperience;
 

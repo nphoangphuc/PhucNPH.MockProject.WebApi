@@ -15,6 +15,14 @@ namespace PhucNPH.MockProject.Repository.Infrastructure.Configuration
 			builder.HasMany<Employee>(d => d.Employees)
 				.WithOne(e => e.Department)
 				.HasForeignKey(e => e.DepartmentId);
+
+			builder.HasData(
+				new Department
+				{
+					Id = Guid.NewGuid(),
+					DepartmentName = "ADMIN_GROUP",
+					DepartmentLocation = "HEAD_OFFICE"
+				});
 		}
 	}
 }

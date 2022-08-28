@@ -41,6 +41,23 @@ namespace PhucNPH.MockProject.Service.Mapper
 				Id = department.Id,
 				DepartmentName = department.DepartmentName,
 				DepartmentLocation = department.DepartmentLocation,
+				NumberOfEmployees =	 department.Employees.Count,
+				EmployeeModels = department.Employees.Select(emp => new EmployeeModel
+				{
+					Id=emp.Id,
+					Username = emp.Username,
+					Address = emp.Address,
+					DOB	= emp.DOB,
+					Phone = emp.Phone,
+					YearExperience = emp.YearExperience,
+					JobDetail = new JobDetailModel
+					{
+						Id = emp.JobDetail.Id,
+						JobDescription = emp.JobDetail.JobDescription,
+						JobLevel = emp.JobDetail.JobLevel,
+						JobTitle = emp.JobDetail.JobTitle.ToString(),
+					}
+				}).ToList()
 			};
 		}
 	}

@@ -34,8 +34,7 @@ namespace PhucNPH.MockProject.Presentation.Controllers
         }
 
         [HttpPost]
-        [AllowAnonymous]
-        public async Task<IActionResult> CreateDepartment(DepartmentCreateModel departmentCreateModel)
+		public async Task<IActionResult> CreateDepartment(DepartmentCreateModel departmentCreateModel)
         {
             var department = _departmentMapper.MapDepartmentCreateModelToDepartment(departmentCreateModel);
 			department = await _unitOfWork.DepartmentRepository.CreateAsync(department);
@@ -63,9 +62,10 @@ namespace PhucNPH.MockProject.Presentation.Controllers
 		}
 
 		[HttpGet]
-		public async Task<ActionResult<List<DepartmentModel>>> GetDepartments()
+		[Route("employees")]
+		public async Task<ActionResult<List<DepartmentModel>>> GetEmployeesInDepartments()
 		{
-			var departments = await _unitOfWork.DepartmentRepository.GetMultipleDepartments();
+			var departments = await _unitOfWork.DepartmentRepository.GetMultipleDepartmentEmployees();
 
 			var departmentModels = departments.Select(department => _departmentMapper.MapDepartmentToDepartmentModel(department)).ToList();
 

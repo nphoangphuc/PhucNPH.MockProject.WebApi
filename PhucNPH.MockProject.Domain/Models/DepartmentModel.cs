@@ -11,5 +11,7 @@ namespace PhucNPH.MockProject.Domain.Models
 		public Guid Id { get; set; }
 		public string DepartmentName { get; set; }
 		public string DepartmentLocation { get; set; }
+		public int NumberOfEmployees { get; set; }
+		public List<EmployeeModel> EmployeeModels { get; set; }
 	}
 }

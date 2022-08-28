@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query;
 using System.Linq.Expressions;
 
 namespace PhucNPH.MockProject.Repository.Infrastructure.Repository
@@ -9,7 +10,8 @@ namespace PhucNPH.MockProject.Repository.Infrastructure.Repository
         Task UpdateAsync(T item);
         Task<T?> SearchForSingleItemAsync(Expression<Func<T, bool>> searchExpression, params Expression<Func<T, object>>[] includes);
         Task<List<T>> SearchForMultipleItemAsync(Expression<Func<T, bool>>? searchExpression = null);
-    }
+		Task<List<T>> SearchForMultipleItemAsync(Expression<Func<T, bool>> searchExpression, Func<IQueryable<T>, IIncludableQueryable<T, object>> include);
+	}
 
     public abstract class Repository<TContext, T> : IRepository<T> where TContext : DbContext where T : class
     {
@@ -52,5 +54,12 @@ namespace PhucNPH.MockProject.Repository.Infrastructure.Repository
                 EntityFrameworkQueryableExtensions.AsNoTracking(DbSet) :
                 EntityFrameworkQueryableExtensions.AsNoTracking(DbSet.Where(searchExpression)));
         }
+
+        public async Task<List<T>> SearchForMultipleItemAsync(Expression<Func<T, bool>> searchExpression, Func<IQueryable<T>, IIncludableQueryable<T, object>> include)
+        {
+			IQueryable<T> arg = ((searchExpression == null) ? EntityFrameworkQueryableExtensions.AsNoTracking(DbSet) : EntityFrameworkQueryableExtensions.AsNoTracking(DbSet.Where(searchExpression)));
+			arg = include(arg);
+			return await EntityFrameworkQueryableExtensions.ToListAsync(arg);
+		}
     }
 }
