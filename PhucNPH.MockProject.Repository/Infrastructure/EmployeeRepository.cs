@@ -1,12 +1,7 @@
 ﻿using Microsoft.AspNet.Identity;
-using Microsoft.Extensions.Configuration;
-using Microsoft.IdentityModel.Tokens;
 using PhucNPH.MockProject.Domain.Entities;
 using PhucNPH.MockProject.Domain.Models;
 using PhucNPH.MockProject.Repository.Infrastructure.Repository;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
 
 namespace PhucNPH.MockProject.Repository.Infrastructure
 {

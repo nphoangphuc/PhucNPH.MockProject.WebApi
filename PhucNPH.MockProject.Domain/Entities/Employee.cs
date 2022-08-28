@@ -9,7 +9,6 @@
         public string Password { get; set; }
         public int YearExperience { get; set; }
         public bool Deleted { get; set; }
-        public uint RecordVersion { get; set; }
 
 		// 1-to-1 relationship
 		public Guid JobDetailId { get; set; }
