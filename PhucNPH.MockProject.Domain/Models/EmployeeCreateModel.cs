@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PhucNPH.MockProject.Domain.Models
+﻿namespace PhucNPH.MockProject.Domain.Models
 {
     public class EmployeeCreateModel
     {
@@ -14,5 +8,6 @@ namespace PhucNPH.MockProject.Domain.Models
         public string Address { get; set; }
         public string Password { get; set; }
         public int YearExperience { get; set; }
-    }
+        public JobDetailCreateModel JobDetailCreateModel { get; set; }
+	}
 }

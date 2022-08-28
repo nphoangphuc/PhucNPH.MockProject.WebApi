@@ -25,6 +25,7 @@ namespace PhucNPH.MockProject.Domain.Constants
         public static class Constants
         {
             public const int PasswordMinLength = 5;
+            public const int DepartmentMinLength = 3;
             public static DateTime MinDate = DateTime.Parse("01/01/1900");
             public static DateTime MaxDate = DateTime.Now;
         }
